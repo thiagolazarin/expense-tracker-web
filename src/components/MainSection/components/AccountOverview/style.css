@@ -1,0 +1,21 @@
+.AccountOverview-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    font-family: var(--font-body);
+}
+
+.AccountOverview-col-1-container{
+    display: flex;
+    justify-content: space-between;
+    width: 35%;
+}
+
+.AccountOverview-col p{
+    font-size: 13px;
+    color: var(--dark-grey);
+}
+
+.AccountOverview-lastchild p{
+    text-align: end;
+}

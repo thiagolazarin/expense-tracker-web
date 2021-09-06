@@ -1,0 +1,16 @@
+.account-item-container {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.account-item-text {
+    text-align: center;
+    margin-left: 7px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+

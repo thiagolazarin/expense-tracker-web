@@ -1,14 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root{
+    --primary-color: #f2f2f6;
+    --secundary-color: #BFBBCC;
+    --terciary-color: #0819f8;
+    --dark-grey: #545356;
+    --light-blue: #345ff2;
+
+    --green: #34be4e;
+    --light-green: #cbedd2;
+    --orange: #f28338;
+    --light-orange: #faf8f6;
+    --grey: #fafafa;
+
+    --font-logo: 'Bebas Neue', cursive;
+    --font-body: 'Open Sans', sans-serif; /* Weights - 400, 600, 700*/
 }

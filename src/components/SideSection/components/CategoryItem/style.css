@@ -1,0 +1,10 @@
+.category-item-container{
+    display: flex;
+    align-items: center;
+    padding: 8px;
+}
+
+.category-item-container p{
+    margin-left: 8px;
+    font-family: var(--font-body);
+}

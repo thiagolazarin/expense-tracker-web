@@ -1,0 +1,20 @@
+.account-add-button-container{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    padding: 5px;
+    margin-top: 20px;
+}
+
+.account-add-button-container button{
+    border: none;
+    background-color: transparent ;
+    font-family: var(--font-body);
+    font-weight: bold;
+    color: var(--terciary-color);
+}
+
+.account-add-button-icon{
+    color: var(--terciary-color);
+    margin-right: 10px;
+}

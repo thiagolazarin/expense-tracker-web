@@ -1,0 +1,16 @@
+.container-main{
+    width: 100%;
+    height: auto;
+    min-height: 70px;
+    margin-bottom: 30px;
+
+}
+
+.container-main h3{
+    font-family: var(--font-body);
+    color: var(--dark-grey);
+    margin-bottom: 15px;
+    font-size: 14px;
+    letter-spacing: 0.1px;
+
+}
