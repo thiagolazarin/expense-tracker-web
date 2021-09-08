@@ -21,8 +21,7 @@ const AccountOverview = (props) => {
                 <p>Net</p>
                 <h3>$120.56</h3>
             </div>
-
-
+            
         </div>
 
 

@@ -6,6 +6,7 @@ import DateRangeIcon from '@material-ui/icons/DateRange';
 
 import SearchBar from './components/SearchBar';
 import AccountOverview from './components/AccountOverview';
+import ListItem from './components/ListItem';
 
 const MainSection = (props) => {
     return(
@@ -27,6 +28,8 @@ const MainSection = (props) => {
             <SearchBar />
 
             <AccountOverview />
+
+            <ListItem />
 
         
         </div>

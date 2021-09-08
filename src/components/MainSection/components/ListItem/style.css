@@ -1,0 +1,29 @@
+.listItem-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 15px;
+    font-family: var(--font-body);
+    border-bottom: 1px solid #efefef;
+    align-items: center;
+}
+
+.listItem-col-1-container{
+    display: flex;
+    justify-content: space-between;
+    width: 26%;
+}
+
+.listItem-texts p{
+    font-size: 13px;
+    color: var(--dark-grey);
+}
+
+.listItem-total p{
+    font-family: var(--font-body);
+    font-weight: 600;
+}
+
+.listItem-icon {
+    margin-left: 5px;
+}
+
