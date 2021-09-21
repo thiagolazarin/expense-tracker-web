@@ -30,13 +30,13 @@ const ListItem = (props) => {
                 </div>
 
                 <div className="listItem-texts">
-                    <h4>Amazon</h4>
-                    <p>17 jun' 20, 07:32 PM</p>
+                    <h4>{props.descricao}</h4>
+                    <p>{props.data}</p>
                 </div>
             </div>
             
             <div className="listItem-total">
-                <p>$120.40</p>
+                <p>${props.valor}</p>
             </div>
         </div>
 

@@ -31,7 +31,7 @@ const SideSection = (props) => {
             <Container title="accounts" children={<AccountItem account="Nubank"/>} footer={<AccountAddButton/>}/>
 
             <Container title="categories" children={categorias.map((c) => (
-                    <CategoryItem name={c.name} iconId={c.iconId} />
+                    <CategoryItem name={c.name} iconId={c.iconId} key={c.id}/>
                 ))}/>
         </div>
     )
