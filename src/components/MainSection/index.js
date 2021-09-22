@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import './style.css';
 
 import Fab from '@material-ui/core/Fab';
@@ -44,9 +44,10 @@ const useStyles = makeStyles((theme) => ({
 
 const MainSection = (props) => {
     const classes = useStyles();
-    const [open, setOpen] = useState(false);
 
-    const [selectedDate, setSelectedDate] = useState(DateTime.now());
+    const [open, setOpen] = useState(false);
+    const [ transactions, setTransactions ] = useState([]);
+    const [ selectedDate, setSelectedDate ] = useState(DateTime.now());
     const [type, setType] = useState(1);
     const [ category, setCategory ]= useState(1);
     const [ description, setDescription ] = useState('');
@@ -62,6 +63,16 @@ const MainSection = (props) => {
 
     const baseUrl = "http://localhost:4000/api/v1";
 
+    const fetchTransactions = async () => {
+        try{
+            const response = await axios.get(baseUrl + "/transaction");
+            setTransactions(response.data);
+        }
+        catch (e) {
+            console.log(e);
+        }
+    }
+
     const registerTransaction = async () => {
         try{
             await axios.post(baseUrl + "/transaction", {
@@ -71,11 +82,19 @@ const MainSection = (props) => {
                 descricao: description,
                 data: selectedDate
             });
+
+            setOpen(false);
+            await fetchTransactions();
         }
         catch (e) {
             console.log(e);
         }
     }
+
+    // Vai chamar a nossa funcao fetchTransactions() quando o componente MainSection for renderizado.
+    useEffect(() => {
+        fetchTransactions();
+    }, [])
 
     return (
 
@@ -124,8 +143,11 @@ const MainSection = (props) => {
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                             >
-                                <option value={1}>Veiculo</option>
-                                <option value={2}>Alimentacao</option>
+
+                                {props.categories.map((c) => (
+                                    <option value={c.cat_id} key={c.cat_id}>{c.cat_nome}</option>
+                                ))}
+
                             </Select>
 
                             <MuiPickersUtilsProvider utils={LuxonUtils}>
@@ -155,9 +177,9 @@ const MainSection = (props) => {
 
             <AccountOverview/>
 
-            {props.trans.map((t) => (
-                <ListItem descricao="Netflix" data={DateTime.fromISO(t.tran_data).setLocale('pt-BR').toLocaleString()}
-                          valor={t.tran_valor}/>
+            {transactions.map((t) => (
+                <ListItem descricao={t.descricao} data={DateTime.fromISO(t.tran_data).setLocale('pt-BR').toLocaleString()}
+                          valor={t.tran_valor} tipo_transacao={t.tipo_transasao_id}/>
             ))}
         </div>
 

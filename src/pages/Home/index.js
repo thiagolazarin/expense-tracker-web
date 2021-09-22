@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
 import './style.css'
 
 // API Requests
 import axios from "axios";
 
+
 // Components
 import Sidebar from '../../components/Sidebar';
 import SideSection from "../../components/SideSection";
 import MainSection from '../../components/MainSection';
+import {useEffect, useState} from "react";
 
 // State = Estado de um componente.
 // Axios = Requisicao HTTP.
@@ -15,31 +16,30 @@ import MainSection from '../../components/MainSection';
 // Lifecycle = Ciclos de vida do componente que podemos controlar.
 
 const Home = (props) => {
-    const [ transactions, setTransactions ] = useState([]);
+    const [ categories, setCategories ]= useState([]);
 
     const baseUrl = "http://localhost:4000/api/v1";
 
-    const fetchTransactions = async () => {
+    const fetchCategories = async () => {
         try{
-            const response = await axios.get(baseUrl + "/transaction");
-            setTransactions(response.data)
+            const response = await axios.get(baseUrl + "/category");
+            console.log(response.data)
+            setCategories(response.data);
         }
         catch (e) {
             console.log(e);
         }
     }
 
-    // Vai chamar a nossa funcao fetchTransactions() quando o componente Home for renderizado.
     useEffect(() => {
-        fetchTransactions();
-
+        fetchCategories();
     }, [])
 
     return(
         <div className="home-container">
             <Sidebar />
-            <SideSection />
-            <MainSection trans={transactions}/>
+            <SideSection categories={categories}/>
+            <MainSection categories={categories} />
 
         </div>
     )

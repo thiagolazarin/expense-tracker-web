@@ -1,11 +1,9 @@
 import './style.css';
 
 // Material UI
-import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
-
-//assets
-import AmazonLogo from '../../../../assets/images/amazon-icon.png';
+import EjectIcon from '@material-ui/icons/Eject';
+import { green, red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,8 +23,7 @@ const ListItem = (props) => {
 
             <div className="listItem-col-1-container">
                 <div className="listItem-icon">
-                    <Avatar variant="square" className={classes.root} alt="Amazon logo" src={AmazonLogo}>
-                    </Avatar>
+                    <EjectIcon style={props.tipo_transacao === 1 ? {color: red[500]} : {color: green[500]}}/>
                 </div>
 
                 <div className="listItem-texts">
