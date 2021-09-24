@@ -98,17 +98,18 @@ const MainSection = (props) => {
     }
 
     const calculateTotal = () => {
+        let totalExp = 0.0;
+        let totalInc = 0.0;
         for (let i = 0; i < transactions.length; i++) {
             if (transactions[i].tipo_transasao_id === 1) {
-                setTotalExpense(parseFloat(totalExpense) + parseFloat(transactions[i].tran_valor));
-                console.log(parseFloat(totalExpense))
-
+                totalExp += parseFloat(transactions[i].tran_valor);
             } else if(transactions[i].tipo_transasao_id === 2) {
-                setTotalIncome(totalIncome + parseFloat(transactions[i].tran_valor));
+                totalInc += parseFloat(transactions[i].tran_valor);
             }
         }
-
-        setTotalNet(parseFloat(totalIncome) - parseFloat(totalExpense));
+        setTotalExpense(totalExp);
+        setTotalIncome(totalInc);
+        setTotalNet(totalInc - totalExp)
     }
 
     // Vai chamar a nossa funcao fetchTransactions() quando o componente MainSection for renderizado.
