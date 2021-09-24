@@ -21,7 +21,7 @@ import AccountOverview from './components/AccountOverview';
 import ListItem from './components/ListItem';
 
 // Date helper
-import { DateTime } from "luxon";
+import {DateTime} from "luxon";
 
 // API Requests
 import axios from "axios";
@@ -34,7 +34,10 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         display: 'flex',
+        justifyContent: 'space-between',
         flexDirection: 'column',
+        width: "30%",
+        height: "600px",
         backgroundColor: theme.palette.background.paper,
         border: '2px solid #000',
         boxShadow: theme.shadows[5],
@@ -46,12 +49,17 @@ const MainSection = (props) => {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
-    const [ transactions, setTransactions ] = useState([]);
-    const [ selectedDate, setSelectedDate ] = useState(DateTime.now());
+    const [transactions, setTransactions] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(DateTime.now());
     const [type, setType] = useState(1);
-    const [ category, setCategory ]= useState(1);
-    const [ description, setDescription ] = useState('');
-    const [ value, setValue ] = useState('');
+    const [category, setCategory] = useState(1);
+    const [description, setDescription] = useState('');
+    const [value, setValue] = useState('');
+
+    const [totalExpense, setTotalExpense] = useState(0.0);
+    const [totalIncome, setTotalIncome] = useState(0.0);
+    const [totalNet, setTotalNet] = useState(0.0);
+
 
     const toggleModal = () => {
         setOpen(!open);
@@ -64,17 +72,16 @@ const MainSection = (props) => {
     const baseUrl = "http://localhost:4000/api/v1";
 
     const fetchTransactions = async () => {
-        try{
+        try {
             const response = await axios.get(baseUrl + "/transaction");
             setTransactions(response.data);
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
         }
     }
 
     const registerTransaction = async () => {
-        try{
+        try {
             await axios.post(baseUrl + "/transaction", {
                 tipo: type,
                 valor: value,
@@ -85,19 +92,35 @@ const MainSection = (props) => {
 
             setOpen(false);
             await fetchTransactions();
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
         }
     }
 
+    const calculateTotal = () => {
+        for (let i = 0; i < transactions.length; i++) {
+            if (transactions[i].tipo_transasao_id === 1) {
+                setTotalExpense(parseFloat(totalExpense) + parseFloat(transactions[i].tran_valor));
+                console.log(parseFloat(totalExpense))
+
+            } else if(transactions[i].tipo_transasao_id === 2) {
+                setTotalIncome(totalIncome + parseFloat(transactions[i].tran_valor));
+            }
+        }
+
+        setTotalNet(parseFloat(totalIncome) - parseFloat(totalExpense));
+    }
+
     // Vai chamar a nossa funcao fetchTransactions() quando o componente MainSection for renderizado.
-    useEffect(() => {
-        fetchTransactions();
+    useEffect(async () => {
+        await fetchTransactions();
     }, [])
 
-    return (
+    useEffect(() => {
+        calculateTotal();
+    }, [transactions])
 
+    return (
         <div className="mainSection-container">
             <div className="mainSection-header">
                 <h1>Daily Transactions</h1>
@@ -124,8 +147,11 @@ const MainSection = (props) => {
                 >
                     <Fade in={open}>
                         <div className={classes.paper}>
-                            <TextField id="outlined-basic" label="Description" variant="outlined" onChange={(e) => setDescription(e.target.value)}/>
-                            <TextField id="outlined-basic" label="Values" variant="outlined" onChange={(e) => setValue(e.target.value)}/>
+                            <h3 className="modal-title">Register Transaction</h3>
+                            <TextField id="outlined-basic" label="Description" variant="outlined"
+                                       onChange={(e) => setDescription(e.target.value)}/>
+                            <TextField id="outlined-basic" label="Values" variant="outlined"
+                                       onChange={(e) => setValue(e.target.value)}/>
 
                             <InputLabel htmlFor="age-native-simple">Type</InputLabel>
                             <Select
@@ -164,8 +190,9 @@ const MainSection = (props) => {
                                     }}
                                 />
                             </MuiPickersUtilsProvider>
-                            <Button variant="contained" size="large" color="primary" className={classes.margin} onClick={registerTransaction}>
-                                Register transaction
+                            <Button variant="contained" size="large" color="primary" className={classes.margin}
+                                    onClick={registerTransaction}>
+                                Register
                             </Button>
                         </div>
                     </Fade>
@@ -175,16 +202,15 @@ const MainSection = (props) => {
 
             <SearchBar/>
 
-            <AccountOverview/>
+            <AccountOverview income={totalIncome} expense={totalExpense} net={totalNet}/>
 
             {transactions.map((t) => (
-                <ListItem descricao={t.descricao} data={DateTime.fromISO(t.tran_data).setLocale('pt-BR').toLocaleString()}
+                <ListItem descricao={t.descricao}
+                          data={DateTime.fromISO(t.tran_data).setLocale('pt-BR').toLocaleString()}
                           valor={t.tran_valor} tipo_transacao={t.tipo_transasao_id}/>
             ))}
         </div>
-
     )
-
 }
 
 export default MainSection;

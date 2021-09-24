@@ -1,14 +1,13 @@
+import {useEffect, useState} from "react";
 import './style.css'
-
 // API Requests
+
+
 import axios from "axios";
-
-
 // Components
 import Sidebar from '../../components/Sidebar';
 import SideSection from "../../components/SideSection";
 import MainSection from '../../components/MainSection';
-import {useEffect, useState} from "react";
 
 // State = Estado de um componente.
 // Axios = Requisicao HTTP.
@@ -23,7 +22,6 @@ const Home = (props) => {
     const fetchCategories = async () => {
         try{
             const response = await axios.get(baseUrl + "/category");
-            console.log(response.data)
             setCategories(response.data);
         }
         catch (e) {
@@ -38,7 +36,7 @@ const Home = (props) => {
     return(
         <div className="home-container">
             <Sidebar />
-            <SideSection categories={categories}/>
+            <SideSection categories={categories} updateCategories={fetchCategories}/>
             <MainSection categories={categories} />
 
         </div>

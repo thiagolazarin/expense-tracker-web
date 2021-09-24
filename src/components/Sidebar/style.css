@@ -33,3 +33,26 @@
     align-items: center;
 }
 
+.chooseCategoryIcon-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap:  wrap
+}
+
+.chooseCategoryIcon-container img{
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
+
+.chooseCategoryIcon-container .icon-selected{
+    filter: drop-shadow(2px 4px 8px var(--light-blue));
+}
+
+.chooseCategoryIcon-container img:hover{
+    filter: drop-shadow(2px 4px 8px var(--light-blue));
+    cursor: pointer;
+}
+
+

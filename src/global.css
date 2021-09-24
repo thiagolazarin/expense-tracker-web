@@ -23,3 +23,9 @@
     --font-logo: 'Bebas Neue', cursive;
     --font-body: 'Open Sans', sans-serif; /* Weights - 400, 600, 700*/
 }
+
+.modal-title{
+    text-align: center;
+    font-family: var(--font-body);
+    color: var(--dark-grey);
+}

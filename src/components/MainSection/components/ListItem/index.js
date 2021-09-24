@@ -23,7 +23,7 @@ const ListItem = (props) => {
 
             <div className="listItem-col-1-container">
                 <div className="listItem-icon">
-                    <EjectIcon style={props.tipo_transacao === 1 ? {color: red[500]} : {color: green[500]}}/>
+                    <EjectIcon style={props.tipo_transacao === 1 ? {color: red[500], transform: "rotateX(180deg)"} : {color: green[500]}}/>
                 </div>
 
                 <div className="listItem-texts">

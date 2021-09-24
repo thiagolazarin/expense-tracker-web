@@ -1,5 +1,6 @@
 import './style.css'
 
+import AddButton from "../AddButton"
 
 const Container = (props) => {
     return(
@@ -8,8 +9,8 @@ const Container = (props) => {
 
             {props.children}
 
-            {props.footer}
-        </div>
+            <AddButton clickAction={props.clickAction}/>
+       </div>
     )
 }
 
